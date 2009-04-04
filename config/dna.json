@@ -30,6 +30,12 @@
     },
     {
       "name": "ssl-cert"
+    },
+    {
+      "name": "fastthread"
+    },
+    {
+      "name": "libapache2-mod-passenger"
     }
     
     
@@ -40,12 +46,6 @@
     {
       "name": "rake",
       "version": "0.8.3"
-    },
-    {
-      "name": "fastthread"
-    },
-    {
-      "name": "libapache2-mod-passenger"
     },    
     {
 	  "name": "rails",
