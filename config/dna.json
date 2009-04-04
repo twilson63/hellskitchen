@@ -42,6 +42,12 @@
       "version": "0.8.3"
     },
     {
+      "name": "fastthread"
+    },
+    {
+      "name": "libapache2-mod-passenger"
+    },    
+    {
 	  "name": "rails",
 	  "version": "2.3.2"
     }

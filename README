@@ -1,0 +1,5 @@
+Chef Script for JRS EC2 Servers
+
+This script will take a dna.json file and apply it to the chef-solo server.
+
+sudo chef-solo -l debug -c config/solo.rb -j config/dna.json
