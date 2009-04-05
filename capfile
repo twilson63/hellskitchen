@@ -1,0 +1,106 @@
+# set :instance_id, ""
+# set :instance_url, ""
+
+set :keypair, "ec2-keypair"
+
+set :ec2_dir, ENV['HOME'] + '/.ec2'
+set :keypair_full_path, "#{ec2_dir}/#{keypair}"
+# 32 bit
+set :image_id, "ami-71fd1a18"
+# 64 bit
+# set :image_id, "ami-b1fe19d8"
+
+set :username, "root"
+
+ssh_options[:username] = username
+ssh_options[:keys] = keypair_full_path
+
+role :app, instance_url
+role :web, instance_url
+role :db,  instance_url, :primary => true
+
+
+namespace :hellskitchen do
+
+  task :starters do
+    run "sh -c 'echo \"deb http://apt.brightbox.net hardy main\" > /etc/apt/sources.list.d/brightbox.list'"
+    run "sh -c 'wget -q -O - http://apt.brightbox.net/release.asc | apt-key add -'"
+    run "apt-get update -y"
+    run "apt-get install build-essential ruby1.8-dev rubygems git-core xfsprogs -y"
+    run "gem install json extlib"
+    run "gem install chef ohai --source http://gems.opscode.com --source http://gems.rubyforge.org"
+  
+    run "git clone git://github.com/twilson63/hellskitchen.git"
+    run "chef-solo -l debug -c hellskitchen/config/solo.rb -j hellskitchen/config/dna.json"
+  
+  end
+  
+  # task :create_volume do
+  #   system "ec2-create-volume -size 10 -z us-east-1a"
+  # end
+  # 
+  # task :attach_volume do
+  #   system "ec2-attach-volume #{volume} -i #{instance_id} -d /dev/sdh"
+  #   
+  # end
+  task :main_course do
+    mount_volume
+    move_mysql_data
+  end
+  
+  task :desert do
+    # Need to create deploy User
+    # And make sudo er
+    # public key to server
+    # setup key with git-hub
+  end
+  
+  
+  
+  task :mount_volume do
+    run "mkfs.xfs -f /dev/sdh"
+    run "echo \"/dev/sdh /mnt/data xfs noatime 0 0\" >> /etc/fstab"
+    run "mkdir /mnt/data"
+    run "mount /dev/sdh /mnt/data"
+  end
+  
+  task :move_mysql_data do
+    run "/etc/init.d/mysql stop"
+    run "killall mysqld_safe"
+    run "mkdir /mnt/data/lib /mnt/data/log"
+    run "mv /var/lib/mysql /mnt/data/lib/"
+    run "mv /var/log/mysql /mnt/data/log/"
+    #run "test -f /mnt/data/log/mysql/mysql-bin.index && perl -pi -e 's%/var/log/%/mnt/data/log/%' /mnt/data/log/mysql/mysql-bin.index"
+  
+    mysql_ec2 = %(
+[mysqld]
+innodb_file_per_table
+datadir          = /mnt/data/lib/mysql
+log_bin          = /mnt/data/log/mysql/mysql-bin.log
+max_binlog_size  = 1000M
+#log_slow_queries = /mnt/data/log/mysql/mysql-slow.log
+#long_query_time  = 10
+)
+
+    put mysql_ec2, "/etc/mysql/conf.d/mysql-ec2.cnf"
+    
+    run "rsync -aR /etc/mysql /mnt/data/"
+    
+    run "/etc/init.d/mysql start"
+  end
+  
+  
+  
+  task :rails_version do
+    run "rails -v"
+  end
+
+  task :close do
+    system "ec2-terminate-instances #{instance_id}"    
+  end
+    
+  task :ssh do
+    system "ssh -i #{keypair_full_path} #{username}@#{instance_url}"
+  end
+
+end

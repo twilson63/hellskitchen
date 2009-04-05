@@ -20,6 +20,8 @@
 
 include_recipe 'packages'
 include_recipe 'gems'
+
+execute 'adduser'
 # include_recipe 'applications'
 # 
 # template "/data/someservice.conf" do

@@ -33,11 +33,7 @@
     },
     {
       "name": "libapache2-mod-passenger"
-    }
-    
-    
-    
-      
+    }      
   ],
   "gems": [
     {
