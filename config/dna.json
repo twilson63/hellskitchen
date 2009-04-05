@@ -44,9 +44,6 @@
       "name": "libxml2-dev"
     },
     {
-      "name": "libxslt"
-    },
-    {
       "name": "libxslt-dev"
     }
     
