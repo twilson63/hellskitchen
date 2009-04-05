@@ -33,7 +33,24 @@
     },
     {
       "name": "libapache2-mod-passenger"
-    }      
+    },
+    {
+      "name": "sphinx-search"
+    },
+    {
+      "name": "libxml2"
+    },
+    {
+      "name": "libxml2-dev"
+    },
+    {
+      "name": "libxslt"
+    },
+    {
+      "name": "libxslt-dev"
+    },
+    
+          
   ],
   "gems": [
     {
@@ -46,7 +63,31 @@
     {
 	  "name": "rails",
 	  "version": "2.3.2"
+    },
+    {
+    "name": "fastercsv"
+    },
+    {
+    "name": "sinatra"
+    },
+    {
+    "name": "nokogiri"
+    },
+    {
+    "name": "aws-s3"
+    },
+    {
+    "name": "rest-client"
+    },
+    {
+    "name": "rspec"
+    },
+    {
+    "name": "rspec-rails"
     }
+    
+    
+
   ],
   "recipes": ["main"]
 }

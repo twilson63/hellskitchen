@@ -66,7 +66,7 @@ namespace :hellskitchen do
     run "apt-get install build-essential ruby1.8-dev rubygems git-core xfsprogs -y"
     run "gem install json extlib"
     run "gem install chef ohai --source http://gems.opscode.com --source http://gems.rubyforge.org"
-    
+    run "ln -s /usr/bin/irb1.8 /usr/bin/irb"
   end
   
   task :mount_volume do
