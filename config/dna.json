@@ -84,6 +84,9 @@
     },
     {
     "name": "rspec-rails"
+    },
+    {
+      "name": "haml"
     }
     
     
