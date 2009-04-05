@@ -48,7 +48,7 @@
     },
     {
       "name": "libxslt-dev"
-    },
+    }
     
           
   ],
@@ -88,9 +88,6 @@
     {
       "name": "haml"
     }
-    
-    
-
   ],
   "recipes": ["main"]
 }
