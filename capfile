@@ -23,16 +23,8 @@ role :db,  instance_url, :primary => true
 namespace :hellskitchen do
 
   task :starters do
-    run "sh -c 'echo \"deb http://apt.brightbox.net hardy main\" > /etc/apt/sources.list.d/brightbox.list'"
-    run "sh -c 'wget -q -O - http://apt.brightbox.net/release.asc | apt-key add -'"
-    run "apt-get update -y"
-    run "apt-get install build-essential ruby1.8-dev rubygems git-core xfsprogs -y"
-    run "gem install json extlib"
-    run "gem install chef ohai --source http://gems.opscode.com --source http://gems.rubyforge.org"
-  
-    run "git clone git://github.com/twilson63/hellskitchen.git"
-    run "chef-solo -l debug -c hellskitchen/config/solo.rb -j hellskitchen/config/dna.json"
-  
+    setup_kitchen
+    stock_kitchen
   end
   
   # task :create_volume do
@@ -55,7 +47,27 @@ namespace :hellskitchen do
     # setup key with git-hub
   end
   
+  task :stock_kitchen do
+    run "git clone git://github.com/twilson63/hellskitchen.git"
+    run "chef-solo -l debug -c hellskitchen/config/solo.rb -j hellskitchen/config/dna.json"
+    
+  end
   
+  task :restock do
+    run "cd hellskitchen && git pull origin master"
+    run "chef-solo -l debug -c hellskitchen/config/solo.rb -j hellskitchen/config/dna.json"
+    
+  end
+  
+  task :setup_kitchen do
+    run "sh -c 'echo \"deb http://apt.brightbox.net hardy main\" > /etc/apt/sources.list.d/brightbox.list'"
+    run "sh -c 'wget -q -O - http://apt.brightbox.net/release.asc | apt-key add -'"
+    run "apt-get update -y"
+    run "apt-get install build-essential ruby1.8-dev rubygems git-core xfsprogs -y"
+    run "gem install json extlib"
+    run "gem install chef ohai --source http://gems.opscode.com --source http://gems.rubyforge.org"
+    
+  end
   
   task :mount_volume do
     run "mkfs.xfs -f /dev/sdh"
