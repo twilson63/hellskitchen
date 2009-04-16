@@ -58,6 +58,12 @@ namespace :hellskitchen do
     run "chef-solo -l debug -c hellskitchen/config/solo.rb -j hellskitchen/config/dna.json"
     
   end
+
+  task :stock_nginx do
+    run "git clone git://github.com/twilson63/hellskitchen.git"
+    run "chef-solo -l debug -c hellskitchen/config/solo.rb -j hellskitchen/config/nginx.json"
+    
+  end
   
   task :setup_kitchen do
     run "sh -c 'echo \"deb http://apt.brightbox.net hardy main\" > /etc/apt/sources.list.d/brightbox.list'"
@@ -112,7 +118,8 @@ max_binlog_size  = 1000M
   end
     
   task :ssh do
-    system "ssh -i #{keypair_full_path} #{username}@#{instance_url}"
+    #system "ssh -i #{keypair_full_path} #{username}@#{instance_url}"
+    system "ssh #{username}:#{password}@#{instance_url}"
   end
 
 end
