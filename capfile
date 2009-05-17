@@ -1,5 +1,5 @@
 # set :instance_id, ""
-# set :instance_url, ""
+#set :instance_url, ""
 
 set :keypair, "ec2-keypair"
 
@@ -118,8 +118,8 @@ max_binlog_size  = 1000M
   end
     
   task :ssh do
-    #system "ssh -i #{keypair_full_path} #{username}@#{instance_url}"
-    system "ssh #{username}:#{password}@#{instance_url}"
+    system "ssh -i #{keypair_full_path} #{username}@#{instance_url}"
+    #system "ssh #{username}:#{password}@#{instance_url}"
   end
 
 end

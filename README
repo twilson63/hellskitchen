@@ -1,5 +1,33 @@
-Chef Script for JRS EC2 Servers
+# Hellskitchen
 
-This script will take a dna.json file and apply it to the chef-solo server.
+Welcome to Hellskitchen, this is a capistrano script that uses the chef-solo application to configure a generic Ubuntu 8.04 EC2 image to a ruby on rails production server, running MySQL/Apache/Passenger/Rails 2.3.2.
 
-sudo chef-solo -l debug -c config/solo.rb -j config/dna.json
+## Getting Started
+
+Get the Script:
+
+git clone git://github.com/twilson63/hellskitchen.git 
+
+1. Create your EC2 Instance, I use Ubuntu 8.04(ami-71fd1a18)
+2. If you are planning on using EBS for you database, create an EBS Volume and attach it to your Instance.
+3. Now run ec2-describe-instances and grab your public domain name from the instance you just started.
+4. go do the hellskitchen directory that you cloned from git hub, and run the following command
+
+cap hellskitchen:starters -S instance_url=[your domain here]
+
+This cap script assumes that your running on a mac or linux os, and you have your ec2 setup in .ec2 folder.  This script also assumes the name of your ec2 keypair file is "ec2-keypair", which you can open the capfile and change or override it on the command-line.
+
+The starters command will install and setup ruby, rubygems, and chef-solo and its requirements on your EC2 Instance, then it will add brightbox as a apt-get resources and configure all of the libraries and gems for a ruby on rails deployment.
+
+If you do not like the configuration or would like to try different configs, you can simply create or modify the JSON file in the config directory to suit your own needs.
+
+## Things to do
+
+* Need to add secure user setup
+* Need to add a way to add the user to visudo
+* Need a way to automatically register server on github  
+
+
+
+
+
