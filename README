@@ -9,7 +9,9 @@ Get the Script:
 git clone git://github.com/twilson63/hellskitchen.git 
 
 1. Create your EC2 Instance, I use Ubuntu 8.04(ami-71fd1a18)
-2. If you are planning on using EBS for you database, create an EBS Volume and attach it to your Instance.
+2. If you are planning on using EBS for you database, create an EBS Volume and attach it to your Instance. 
+** Remember to attach it to /dev/sdh
+
 3. Now run ec2-describe-instances and grab your public domain name from the instance you just started.
 4. go do the hellskitchen directory that you cloned from git hub, and run the following command
 

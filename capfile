@@ -70,6 +70,7 @@ namespace :hellskitchen do
     run "sh -c 'wget -q -O - http://apt.brightbox.net/release.asc | apt-key add -'"
     run "apt-get update -y"
     run "apt-get install build-essential ruby1.8-dev rubygems git-core xfsprogs -y"
+    run "gem sources -a http://gems.github.com"
     run "gem install json extlib"
     run "gem install chef ohai --source http://gems.opscode.com --source http://gems.rubyforge.org"
     run "ln -s /usr/bin/irb1.8 /usr/bin/irb"

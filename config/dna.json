@@ -84,6 +84,12 @@
     },
     {
     "name": "haml"
+    },
+    {
+    "name": "graticule"
+    },
+    {
+    "name": "mislav-will_paginate"
     }
   ],
   "recipes": ["main"]
