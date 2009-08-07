@@ -90,7 +90,18 @@
     },
     {
     "name": "mislav-will_paginate"
+    },
+    {
+    "name": "crack"
+    },
+    {
+    "name": "twilson63-sinatra-formhelpers"
+    },
+    {
+    "name": "prawn"
     }
+    
+    
   ],
   "recipes": ["main"]
 }
