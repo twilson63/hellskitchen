@@ -130,7 +130,27 @@ max_binlog_size  = 1000M
 
     run '/etc/init.d/mysql start'    
   end
+  
+  task :setup_deploy_account
+    # Create Deploy User
+    # Need to create it using User Captured Name and Password
     
+    # Need to send user.json to server
+    # Need execute it as root
+    # Need to remove json file
+    
+    # Need to log in as deploy user
+    
+    # Need to mkdir .ssh
+    
+    # Need to upload ruby script that will:
+    
+    # create key
+    # add it to github
+    
+    
+    
+  end  
   
   
   

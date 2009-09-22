@@ -1,5 +1,4 @@
 {
-  "user": "deploy",
   "packages": [
     {
       "name": "mysql-server"

@@ -20,7 +20,7 @@
 
 include_recipe 'packages'
 include_recipe 'gems'
-
+include_recipe 'users'
 #execute 'adduser'
 # include_recipe 'applications'
 # 
