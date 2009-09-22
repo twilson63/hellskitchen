@@ -108,6 +108,30 @@ max_binlog_size  = 1000M
     run "/etc/init.d/mysql start"
   end
   
+  task :refire_sql do
+    #mount volume
+    run 'echo "/dev/sdh /mnt/data xfs noatime 0 0" | sudo tee -a /etc/fstab'
+    run 'mkdir -m 000 /mnt/data'
+    run 'mount /mnt/data'
+    
+    # refire MySQL
+    run "/etc/init.d/mysql stop"
+    # This should not be needed but it sometimes is
+    run "killall mysqld_safe"
+
+    run 'echo "/mnt/data/etc/mysql /etc/mysql     none bind" | sudo tee -a /etc/fstab'
+    run "mount /etc/mysql"
+
+    run 'echo "/mnt/data/lib/mysql /var/lib/mysql none bind" | sudo tee -a /etc/fstab'
+    run 'mount /var/lib/mysql'
+
+    run 'echo "/mnt/data/log/mysql /var/log/mysql none bind" | sudo tee -a /etc/fstab'
+    run 'mount /var/log/mysql'
+
+    run '/etc/init.d/mysql start'    
+  end
+    
+  
   
   
   task :rails_version do
