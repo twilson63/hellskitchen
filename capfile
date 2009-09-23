@@ -131,7 +131,7 @@ max_binlog_size  = 1000M
     run '/etc/init.d/mysql start'    
   end
   
-  task :setup_deploy_account
+  #task :setup_deploy_account
     # Create Deploy User
     # Need to create it using User Captured Name and Password
     
@@ -150,7 +150,7 @@ max_binlog_size  = 1000M
     
     
     
-  end  
+  #end  
   
   
   

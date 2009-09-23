@@ -1,4 +1,5 @@
 {
+  "users": [],
   "packages": [
     {
       "name": "mysql-server"
