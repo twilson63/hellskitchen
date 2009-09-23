@@ -104,6 +104,9 @@
     },
     {
     "name": "right_aws"
+    },
+    {
+    "name": "imagesize"
     }
     
     
