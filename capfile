@@ -1,5 +1,6 @@
 # set :instance_id, ""
 #set :instance_url, ""
+require 'openssl'
 
 set :keypair, "ec2-keypair"
 
@@ -131,7 +132,7 @@ max_binlog_size  = 1000M
     run '/etc/init.d/mysql start'    
   end
   
-  #task :setup_deploy_account
+  task :setup_github do
     # Create Deploy User
     # Need to create it using User Captured Name and Password
     
@@ -142,15 +143,23 @@ max_binlog_size  = 1000M
     # Need to log in as deploy user
     
     # Need to mkdir .ssh
+    run 'mkdir /home/deploy/.ssh'
     
     # Need to upload ruby script that will:
-    
+    new_key = OpenSSL::PKey::RSA.generate(1024)
     # create key
+    put new_key.to_s, '/home/deploy/.ssh/id_rsa'
+    ssh_public_key = new_key.public_key.to_s.gsub('-----BEGIN RSA PUBLIC KEY-----', 'ssh-rsa').gsub('-----END RSA PUBLIC KEY-----','')
+
+    put ssh_public_key, '/home/deploy/.ssh/id_rsa.pub'
+    
     # add it to github
+    run 'curl -F "login=twilson63" -F "token=2e116d9a9db2bfe4b250b0fd62b59a43" https://github.com/api/v2/json/user/key/add -F "title=' + instance_url + '" -F "key=' + ssh_public_key + '"'
     
+    run "chown -hR deploy /home/deploy/.ssh"
+    run "chmod 600 /home/deploy/.ssh/id_rsa"
     
-    
-  #end  
+  end  
   
   
   

@@ -1,5 +1,4 @@
 {
-  "users": [],
   "packages": [
     {
       "name": "mysql-server"
@@ -99,6 +98,12 @@
     },
     {
     "name": "prawn"
+    },
+    {
+    "name": "radiant"
+    },
+    {
+    "name": "right_aws"
     }
     
     
