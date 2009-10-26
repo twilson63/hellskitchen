@@ -20,6 +20,8 @@
 
 include_recipe 'packages'
 include_recipe 'gems'
+include_recipe 'xsendfile'
+include_recipe 's3fs'
 
 #execute 'adduser'
 # include_recipe 'applications'
