@@ -45,7 +45,20 @@
 
     {
       "name": "libxslt1-dev"
+    },
+    {
+      "name": "pkg-config"
+    },
+    {
+      "name": "libcurl4-openssl-dev"
+    },
+    {
+      "name": "libfuse-dev"
+    },
+    {
+      "name": "libfuse2"
     }
+    
           
   ],
   "gems": [
