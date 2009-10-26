@@ -23,7 +23,7 @@ node[:s3fs].each do |s3fs|
       cwd "/tmp"
       code <<-EOH 
       wget #{ s3fs_tarball_src } 
-      tar -xzvs #{ s3fs_tarball } 
+      tar -xzvf #{ s3fs_tarball } 
       cd ./s3fs 
       make 
       sudo make install 
